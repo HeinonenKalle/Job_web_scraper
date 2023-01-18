@@ -1,7 +1,6 @@
 """
 This simple scraper was made by Kalle Heinonen, it was made for a specific topic, so it might need a few tweaks to work
-After making this I realised Duunitori does not allow robots, which could have been checked by using https://duunitori.fi/robots.txt. It however doesnt seem to be configured at all
-so might have to give them a call to ask
+After making this I realised Duunitori does not allow robots, which could have been checked by using https://duunitori.fi/robots.txt.
 """
 import requests
 from bs4 import BeautifulSoup
