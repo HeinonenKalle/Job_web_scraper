@@ -3,12 +3,16 @@
 
 import requests
 from bs4 import BeautifulSoup
+import csv
 
 
 """
 Potential improvements:
 Add the information to a csv file, remember to use "a" option not to overwrite previous data so you can save the data every time
 a job posting is found and not only when the program is finished.
+Improve efficiency:
+Use multithreading:
+Writing on csv file and communicating which pages diffrent cores read might be difficult. Come back later once multithreading course has progressed further.
 """
 
 def main():
@@ -21,7 +25,7 @@ def main():
     while True:
         #the website design made it so 1 redirects to a completely different search results
         if the_page != 1:
-            #Get an url and delete the number on it
+            #Get an url and delete the page number on it 
             URL = "https://duunitori.fi/tyopaikat?alue=Tampere%3BHelsinki&haku=Trainee&order_by=date_posted&sivu=" + str(the_page)
             page = s.get(URL)
             soup = BeautifulSoup(page.content, "html.parser")
@@ -54,6 +58,10 @@ def main():
                         final_list.append(c.replace("\n", ""))
                     print("Company and location " + final_list[0])
                     print("When was the application released and when is the last time to apply " + final_list[1])
+                    with open('jobs.csv', 'a') as open_file:
+                        writer_object = csv.writer(open_file)
+                        writer_object.writerow([final_list[0], final_list[1], searchpage])
+                        open_file.close()
         #goes to the next page
         the_page += 1
         
