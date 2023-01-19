@@ -48,14 +48,14 @@ def main():
                     #gets information like what company and where the job is
                     job_post_data = temp_soup.find_all('p', class_="header__info")
                     list_of_data = []
-                    for k in job_post_data:
+                    for i in job_post_data:
                         #The object is NavigableString so lets make it a normal string
-                        test = k.get_text()
-                        list_of_data.append(test)
+                        i_to_string = i.get_text()
+                        list_of_data.append(i_to_string)
                     final_list = []
-                    for c in list_of_data:
+                    for k in list_of_data:
                         #and now lets remove \n:s from the data to make it readable
-                        final_list.append(c.replace("\n", ""))
+                        final_list.append(k.replace("\n", ""))
                     print("Company and location " + final_list[0])
                     print("When was the application released and when is the last time to apply " + final_list[1])
                     with open('jobs.csv', 'a') as open_file:
