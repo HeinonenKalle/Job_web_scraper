@@ -1,5 +1,4 @@
-#This simple scraper was made by Kalle Heinonen, it was made for a specific topic, so it might need a few tweaks to work
-#After making this I realised Duunitori does not allow robots, which could have been checked by using https://duunitori.fi/robots.txt.
+#This simple scraper was made by Kalle Heinonen, it was made for a specific topic, so it might need changes to work on other stuff
 
 import requests
 from bs4 import BeautifulSoup
@@ -26,7 +25,7 @@ def main():
         #the website design made it so 1 redirects to a completely different search results
         if the_page != 1:
             #Get an url and delete the page number on it 
-            URL = "https://duunitori.fi/tyopaikat?alue=Tampere%3BHelsinki&haku=Trainee&order_by=date_posted&sivu=" + str(the_page)
+            URL = "https://duunitori.fi/tyopaikat?alue=Tampere%3BHelsinki&haku=Harjoittelija&order_by=date_posted&sivu=2" + str(the_page)
             page = s.get(URL)
             soup = BeautifulSoup(page.content, "html.parser")
             #Makes a list of all the jobs on the page
@@ -42,7 +41,7 @@ def main():
                 new_page = s.get(searchpage)
                 #keywords to look for certain talent, would be more efficient if i could easily scrape the specific divs
                 #more keywords can be added with an or statement or removed by removing the or statement and the text after that
-                if new_page.text.find("C++") != -1 or new_page.text.find("Python") != -1:
+                if new_page.text.find("C++") != -1 or new_page.text.find("Python") != -1 or new_page.text.find("Java") != -1:
                     print(searchpage)
                     temp_soup = BeautifulSoup(new_page.content, "html.parser")
                     #gets information like what company and where the job is
